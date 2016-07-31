@@ -1,0 +1,4 @@
+{
+	"/" : "homeController",
+	"/home" : "homeController"
+}

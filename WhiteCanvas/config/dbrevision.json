@@ -1,0 +1,11 @@
+[
+	{
+		"ref" : "db-init",
+		"up" : [
+			"CREATE TABLE IF NOT EXISTS {$db_prefix}revision (id_revision INT NOT NULL AUTO_INCREMENT, ref VARCHAR(32) NOT NULL, down TEXT, PRIMARY KEY (id_revision));"
+		],
+		"down" : [
+			"DROP TABLE IF EXISTS {$db_prefix}revision;"
+		]
+	}
+]

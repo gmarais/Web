@@ -1,0 +1,17 @@
+<article class="feed" data-id="{ $id_image }">
+	<table class="inline_table">
+		<tr>
+			<th>{ $date }</th>
+			<th colspan="2">Uploaded by { $user_name }</th>
+		</tr>
+		<tr>
+			<td colspan="3"><img class="feed_image" data-id="{ $id_image }" src="{ $image_src }" /></td>
+		</tr>
+		<tr>
+			<td id="likes_count_{ $id_image }">Likes: { $likes }</td>
+			<td id="comments_count_{ $id_image }">comments: { $comments }</td>
+			<td>{ $like_and_delete_button }</td>
+		</tr>
+	</table>
+	<hr />
+</article>

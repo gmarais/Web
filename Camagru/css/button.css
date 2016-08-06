@@ -1,0 +1,54 @@
+input:not([type]),
+input[type="email" i],
+input[type="number" i],
+input[type="password" i],
+input[type="tel" i],
+input[type="url" i],
+input[type="text" i]
+{
+	font-family: inherit;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius: 3px;
+	border: solid 1px lightgrey;
+}
+
+label
+{
+	color: grey;
+	margin-right: 12px;
+}
+
+button
+{
+	border: none;
+	font-family: inherit;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #555;
+	border-radius: 3px;
+	color: white;
+	margin: 6px;
+}
+
+button:hover
+{
+	background-color: #444;
+	cursor: pointer;
+}
+
+button:active
+{
+	background-color: #333;
+}
+
+button:disabled
+{
+	background-color: #666;
+	color: #aaa;
+	cursor: auto;
+}

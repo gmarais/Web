@@ -1,0 +1,9 @@
+{include file="mail/mailHeader.html"}
+<h3>Hello {$nickname},</h3>
+
+<p>Thank you for registering to our website.</p>
+<p>Please follow the following link to finish your registration:</p>
+<p><b><a href="{ $validationLink }" target="_blank">{ $validationLink }</a></b></p>
+<br />
+<p><i>If you did not intend to register please ignore this email.</i></p>
+{include file="mail/mailFooter.html"}

@@ -1,0 +1,17 @@
+{ include file="camagruHeader.html" }
+<content class="container">
+	<article class="wc-xs-12">
+		{ $image_feed }
+	</article>
+	<article class="wc-xs-12">
+		<error class="hidden"></error>
+		{ $comment_form }
+	</article>
+	<article id="comments_feed_container" data-id="{ $id_image }" class="wc-xs-12">
+	</article>
+	<article class="wc-xs-12">
+		<img id="loading_feed" class="end_of_feed hidden" src="{ $domain_link }images/loading.gif" alt="loading..." width="64" height="64" />
+		<img id="end_feed" class="end_of_feed" src="{ $domain_link }images/end.jpg" alt="end of feed..." width="64" height="64" />
+	</article>
+</content>
+{ include file="camagruFooter.html" }

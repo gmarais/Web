@@ -1,0 +1,6 @@
+{
+	"/" : "galleryController",
+	"/gallery" : "galleryController",
+	"/workshop" : "workshopController",
+	"/login" : "loginController"
+}

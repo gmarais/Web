@@ -1,6 +1,16 @@
 <?php
+/* ******************************************************** _ *** _ ******** */
+/*                                                   ______//_____\\______   */
+/*   WhiteCanvas 2016                               |                     |  */
+/*                                                  |                     |  */
+/*   Created by Gabriel Marais                      |                     |  */
+/*                                                  |                     |  */
+/*                                                  |_____.____.______W_C_|  */
+/*   https://github.com/gmarais                     |_____________________|  */
+/*                                                  //         ||        \\  */
+/* *********************************************** // ******************* \\ */
 
-/* register ClassLoader as class loader */
+/* register our ClassLoader as the default class loader */
 spl_autoload_register(array(ClassLoader::getInstance(), 'loadClass'));
 
 class ClassLoader {

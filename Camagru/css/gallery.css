@@ -1,0 +1,80 @@
+.inline_table
+{
+	margin-top: 30px;
+	float: none;
+	display: inline-table;
+}
+
+th
+{
+	text-align: left;
+}
+
+td .like,
+td .delete_image,
+td .delete_comment,
+td #send_comment,
+td #cancel_comment
+{
+	float: right;
+}
+
+textarea
+{
+	display: inline-block;
+	overflow: auto;
+	width: 100%;
+}
+
+.end_of_feed
+{
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+#end_feed
+{
+	cursor: pointer;
+}
+
+.feed_image
+{
+	width: 100%;
+	cursor: pointer;
+}
+
+.like
+{
+	background-color: #5d5;
+	color: #333;
+}
+
+.like:hover
+{
+	background-color: #3a3;
+	color: #333;
+}
+
+.like:active
+{
+	background-color: #070;
+	color: #333;
+}
+
+.unlike
+{
+	background-color: #d55;
+	color: #333;
+}
+
+.unlike:hover
+{
+	background-color: #a33;
+	color: #333;
+}
+
+.unlike:active
+{
+	background-color: #700;
+	color: #333;
+}

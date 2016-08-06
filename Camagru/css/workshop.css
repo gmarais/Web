@@ -1,0 +1,112 @@
+sidebar
+{
+	background-color: #C8B7EB;
+	border-radius: 0px 0px 24px 24px;
+	padding-bottom: 15px;
+	margin-bottom: 30px;
+}
+
+.last_images
+{
+	display: inline-block;
+	padding: none;
+	cursor: pointer;
+}
+
+#last_images_list
+{
+	width: 100%;
+	text-align: center;
+}
+
+.mask_button
+{
+	display: inline-block;
+	border-radius: 10%;
+	padding: 1%;
+	border: solid 2px mediumpurple;
+}
+
+.mask_button:hover
+{
+	background-color: lightyellow;
+	border-color: yellow;
+	cursor: pointer;
+}
+
+.mask_button:active
+{
+	background-color: mediumspringgreen;
+	border-color: mediumseagreen;
+}
+
+#camera-container
+{
+	display: inline-block;
+	width: 100%;
+	padding: 12px;
+	border-radius: 24px;
+	background-color: #ddd;
+}
+
+video,
+canvas
+{
+	width: 100%;
+	height: auto;
+	margin: none;
+}
+
+#preview-overlay
+{
+	width: 100%;
+	margin-top: -75%;
+	position: relative;
+}
+
+#receiver
+{
+	margin-bottom: 30px;
+}
+
+#capture
+{
+	background-color: #5d5;
+	color: #333;
+}
+
+#capture:hover
+{
+	background-color: #3a3;
+	color: #333;
+}
+
+#capture:active
+{
+	background-color: #070;
+	color: #333;
+}
+
+#capture:disabled
+{
+	background-color: #bb5;
+	color: #880;
+}
+
+#masks_container
+{
+	margin-bottom: 30px;
+}
+
+@media screen and (max-width: 1000px) {
+	sidebar
+	{
+		margin-top: 15px;
+		border-radius: 24px 24px 24px 24px;
+	}
+
+	#masks_container
+	{
+		margin-bottom: 15px;
+	}
+}

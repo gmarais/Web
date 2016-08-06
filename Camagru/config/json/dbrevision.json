@@ -1,0 +1,28 @@
+[
+	{
+		"ref" : "db-init",
+		"up" : [
+			"CREATE TABLE IF NOT EXISTS {$db_prefix}revision (id_revision INT NOT NULL AUTO_INCREMENT, ref VARCHAR(32) NOT NULL, down TEXT, PRIMARY KEY (id_revision));"
+		],
+		"down" : [
+			"DROP TABLE IF EXISTS {$db_prefix}revision;"
+		]
+	},
+	{
+		"ref" : "camagru00",
+		"up" : [
+			"CREATE TABLE IF NOT EXISTS {$db_prefix}user (id_user INT NOT NULL AUTO_INCREMENT, nickname VARCHAR(24) NOT NULL, email  VARCHAR(255) NOT NULL, password  VARCHAR(32) NOT NULL, key_hash  VARCHAR(32) NOT NULL, active  TINYINT(1) DEFAULT 0 NOT NULL, registration_date DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, PRIMARY KEY (id_user));",
+			"ALTER TABLE {$db_prefix}user ADD UNIQUE (id_user, nickname, email)",
+			"CREATE TABLE IF NOT EXISTS {$db_prefix}image (id_image INT NOT NULL AUTO_INCREMENT, id_user INT NOT NULL, src VARCHAR(255) NOT NULL, date DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, PRIMARY KEY (id_image));",
+			"ALTER TABLE {$db_prefix}image ADD UNIQUE (src)",
+			"CREATE TABLE IF NOT EXISTS {$db_prefix}like (id_like INT NOT NULL AUTO_INCREMENT, id_user INT NOT NULL, id_image INT NOT NULL, PRIMARY KEY (id_like));",
+			"CREATE TABLE IF NOT EXISTS {$db_prefix}comment (id_comment INT NOT NULL AUTO_INCREMENT, id_user INT NOT NULL, id_image INT NOT NULL, comment_text TEXT NOT NULL, date DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, PRIMARY KEY (id_comment));"
+		],
+		"down" : [
+			"DROP TABLE IF EXISTS {$db_prefix}user;",
+			"DROP TABLE IF EXISTS {$db_prefix}image;",
+			"DROP TABLE IF EXISTS {$db_prefix}like;",
+			"DROP TABLE IF EXISTS {$db_prefix}comment;"
+		]
+	}
+]

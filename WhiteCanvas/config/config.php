@@ -1,4 +1,14 @@
 <?php
+/* ******************************************************** _ *** _ ******** */
+/*                                                   ______//_____\\______   */
+/*   WhiteCanvas 2016                               |                     |  */
+/*                                                  |                     |  */
+/*   Created by Gabriel Marais                      |                     |  */
+/*                                                  |                     |  */
+/*                                                  |_____.____.______W_C_|  */
+/*   https://github.com/gmarais                     |_____________________|  */
+/*                                                  //         ||        \\  */
+/* *********************************************** // ******************* \\ */
 
 /*
  * Error reporting for developpement mode :
@@ -19,7 +29,18 @@ require_once 'config/globals.php';
  */
 require_once _CLASSES_DIR_.'/autoloader.php';
 
-/**
+/*
+ * Do this once to create the encrypted database credentials file:
+ */
+//$db_type = 'mysql';
+//$db_name = 'dbname';
+//$db_host = 'hostname';
+//$db_port = 'port';
+//$db_user = 'root';
+//$db_pass = 'password';
+//Db::registerCredentials($db_type, $db_name, $db_host, $db_port, $db_user, $db_pass);
+
+/*
  * Revision of data base :
  */
 DbRevision::processRevision();

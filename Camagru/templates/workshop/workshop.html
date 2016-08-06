@@ -1,0 +1,36 @@
+{ include file="camagruHeader.html" }
+<content class="container">
+	<article class="wc-xs-12 wc-sm-12 wc-md-7 wc-lg-8">
+		<h3>Welcome to Camagru { $userName }!</h3>
+		<table>
+			<tr>
+				<td id="no_cam_feedback" class="hidden-xs hidden-sm"><label>No web camera?<br />Upload your image!</label></td>
+				<td><input id="file_loader" type="file" /></td>
+			</tr>
+		</table>
+		<br />
+		<div id="camera-container">
+			<canvas id="canvas" class="hidden" width="800" height="600"></canvas>
+			<video id="camera" width="800" height="600"></video>
+			<img id="preview-overlay" src="images/masks/butterfly.png" />
+		</div>
+		<error class="hidden"></error>
+		<button id="play">Play</button>
+		<button id="pause">Pause</button>
+		<button id="stop">Stop</button>
+		<button id="capture">Do it!</button>
+		<hr />
+		<article id="masks_container" class="wc-xs-12">
+			<h3>Pick a mask here:</h3>
+			{ $masks_lines }
+		</article>
+		<hr class="hidden-md hidden-lg" />
+	</article>
+	<sidebar class="wc-xs-12 wc-sm-12 wc-md-5 wc-lg-4">
+		<h3>Your last pictures:</h3>
+		<div id="last_images_list">
+		</div>
+	</sidebar>
+
+</content>
+{ include file="camagruFooter.html" }

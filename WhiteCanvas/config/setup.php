@@ -43,9 +43,12 @@ require_once _CLASSES_DIR_.'/autoloader.php';
 /*
  * Revision of data base :
  */
-DbRevision::processRevision();
+if (Db::getInstance()->checkConnection())
+{
+	DbRevision::processRevision();
+}
 
 /**
- * Utilisation du cache quand c'est possible :
+ * Use cache when possible :
  */
 // CacheLoader::load();

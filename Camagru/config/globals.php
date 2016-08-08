@@ -32,7 +32,7 @@
 */
 
 // Domain
-$prefix = '/site/';
+$prefix = '/camagru/';
 if (strstr($_SERVER['SERVER_NAME'], 'localhost')
 	|| strstr($_SERVER['SERVER_NAME'], $_SERVER['SERVER_ADDR'])
 )

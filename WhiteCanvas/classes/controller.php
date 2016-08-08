@@ -16,12 +16,13 @@ abstract class Controller
 	private $_js = array();
 	private $_css = array();
 
-	abstract protected function checkToken();
 	abstract protected function render();
 
 	public function run()
 	{
-		$this->checkToken();
+		$checkTokenMethod = "checkToken";
+		if (method_exists($this, $checkTokenMethod))
+			$this->$checkTokenMethod();
 		$this->setTranslation();
 		$this->getAction();
 	}

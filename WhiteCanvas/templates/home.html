@@ -1,8 +1,57 @@
 <html>
 	<head>
+		<link rel="icon" href="favicon.ico">
+		<title>WhiteCanvas</title>
+		{ $css_files }
+		{ $js_files }
+		<style>
+			header{background-color: #def;height: 132px;border-bottom: 4px solid #cde;}
+			h1{font-size: 4em;line-height: 2;color: #5a2ca0;}
+			@media screen and (max-width: 500px) {
+				h1{font-size: 10vw;}
+				#logo{height: 24vw;width: auto;}
+				header{height: 32vw;}
+			}
+			navbar, content{display: block;}
+			#logo{display: inline-block;float: left;}
+			hr{border-style: dashed; border-color: gainsboro;}
+			p,li{color:#567;}
+			h2,h3{color:#456;}
+	</style>
 	</head>
 	<body>
-		<h1>WhiteCanvas</h1>
-		<h3>Welcome and happy coding!</h3>
+		<header>
+			<navbar class="container">
+				<img width="128" height="128" id="logo" src="images/wc.png" alt="WhiteCanvas-logo">
+				<h1>WhiteCanvas</h1>
+			</navbar>
+		</header>
+		<error class="hidden"></error>
+		<content class="container">
+			<h2>The main PHP classes:</h2>
+			<h3>Autoloader</h3>
+			<p>The autoloader use a list of folders where your PHP classes can be found when required.</p>
+			<p>These folders are defined in _CONFIG_DIR_/json/autoloaded.json by a constant or a path.</p>
+			<hr>
+			<h3>Route</h3>
+			<p>The route class use an array of uri to controllers to find the right controller for the current requested uri.</p>
+			<p>These uri/controllers pairs can be defined in _CONFIG_DIR_/json/routes.json by the uri and the full class name.</p>
+			<hr>
+			<h3>Controller</h3>
+			<p>The controller's abstract class defines the run method that every controllers should at least have and a set of tools that can be relevent such as:</p>
+			<ul>
+				<li>The possibility of implementing a checkToken method that will be called first when run is called.</li>
+				<li>The setTranslation method that will set the current language to a lang value provided by the request.</li>
+				<li>The getAction method that will search a method with a 'process' prefix to run instead of the default render method.</li>
+				<li>An alias to the translate method "_t" to ease the use of the translation class inside a controller.</li>
+				<li>The couples addJS fecthJS addCSS fetchCSS methods to facilitate the linking of css or js files into your templates.</li>
+				<li>And finally a processRenderHelper to make ajax calls possible without having to write one line in the targeted controller.</li>
+			</ul>
+			<hr>
+			<p>Happy coding!</p>
+		</content>
+		<footer>
+
+		</footer>
 	</body>
 </html>

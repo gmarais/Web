@@ -19,7 +19,7 @@ class ClassLoader {
 	private static $instance;
 
 	/* stores a className -> filePath map */
-	private $class_list;
+	private $class_list = array();
 	/* tells whether working from saved file */
 	private $refreshed;
 
@@ -62,11 +62,20 @@ class ClassLoader {
 
 	private function refreshClassList()
 	{
-		$this->class_list = array_merge(
-			$this->scanDirectory(_CLASSES_DIR_),
-			$this->scanDirectory(_CONTROLLERS_DIR_),
-			$this->scanDirectory(_DB_OBJECTS_DIR_)
-		);
+		$autoloaded = json_decode(file_get_contents(_CONFIG_DIR_."/json/autoloaded.json"));
+		foreach ($autoloaded as $directory) {
+			if (!is_dir($directory))
+			{
+				$directory = constant($directory);
+			}
+			if (is_dir($directory))
+			{
+				$this->class_list = array_merge(
+					$this->class_list,
+					$this->scanDirectory($directory)
+				);
+			}
+		}
 		$this->refreshed = true;
 		$this->saveClassList();
 	}

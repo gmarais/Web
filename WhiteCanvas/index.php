@@ -11,7 +11,7 @@
 /* *********************************************** // ******************* \\ */
 
 // Loading required files and configuration
-require_once 'config/config.php';
+require_once 'config/setup.php';
 
 // Instanciate a route object.
 $route = new Route();

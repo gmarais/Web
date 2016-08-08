@@ -15,13 +15,20 @@
 			"ALTER TABLE {$db_prefix}user ADD UNIQUE (id_user, nickname, email)",
 			"CREATE TABLE IF NOT EXISTS {$db_prefix}image (id_image INT NOT NULL AUTO_INCREMENT, id_user INT NOT NULL, src VARCHAR(255) NOT NULL, date DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, PRIMARY KEY (id_image));",
 			"ALTER TABLE {$db_prefix}image ADD UNIQUE (src)",
-			"CREATE TABLE IF NOT EXISTS {$db_prefix}like (id_like INT NOT NULL AUTO_INCREMENT, id_user INT NOT NULL, id_image INT NOT NULL, PRIMARY KEY (id_like));",
-			"CREATE TABLE IF NOT EXISTS {$db_prefix}comment (id_comment INT NOT NULL AUTO_INCREMENT, id_user INT NOT NULL, id_image INT NOT NULL, comment_text TEXT NOT NULL, date DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, PRIMARY KEY (id_comment));"
+			"CREATE TABLE IF NOT EXISTS {$db_prefix}like (id_like INT NOT NULL AUTO_INCREMENT, id_user INT NOT NULL, id_image INT NOT NULL, PRIMARY KEY (id_like));"
 		],
 		"down" : [
 			"DROP TABLE IF EXISTS {$db_prefix}user;",
 			"DROP TABLE IF EXISTS {$db_prefix}image;",
-			"DROP TABLE IF EXISTS {$db_prefix}like;",
+			"DROP TABLE IF EXISTS {$db_prefix}like;"
+		]
+	},
+	{
+		"ref" : "camagru01",
+		"up" : [
+			"CREATE TABLE IF NOT EXISTS {$db_prefix}comment (id_comment INT NOT NULL AUTO_INCREMENT, id_user INT NOT NULL, id_image INT NOT NULL, comment_text TEXT NOT NULL, date DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, PRIMARY KEY (id_comment));"
+		],
+		"down" : [
 			"DROP TABLE IF EXISTS {$db_prefix}comment;"
 		]
 	}

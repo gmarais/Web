@@ -88,7 +88,8 @@ class WorkshopController extends Controller
 			imagedestroy($mask);
 		}
 		$image_name = MD5($this->user->id.$this->user->key_hash.time());
-		@mkdir('images/db', 0755, true);
+		if (!is_dir('images/db'))
+			@mkdir('images/db', 0755, true);
 		imagepng($dest, 'images/db/'.$image_name.'.png');
 		imagedestroy($dest);
 		$image = new Image();

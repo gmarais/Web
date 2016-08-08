@@ -16,6 +16,7 @@ class Db
 	private static $instance;
 	private $_type = '';
 	private $_host = '';
+	private $_port = '';
 	private $_user = '';
 	private $_password = '';
 	private $_dbname = '';
@@ -79,8 +80,11 @@ class Db
 
 	public function __construct()
 	{
-		$this->readCredentials();
-		$this->connect();
+		if (file_exists(_CONFIG_DIR_."/encoded/dbcredentials.php"))
+		{
+			$this->readCredentials();
+			$this->connect();
+		}
 	}
 
 	public function __destruct()
@@ -119,19 +123,22 @@ class Db
 	public function execute($syntax, $data = null)
 	{
 		$this->checkConnection();
-		try
+		if ($this->checkConnection())
 		{
-			$request = $this->_pdo->prepare($syntax);
-			$this->_pdo->beginTransaction();
-			$result = $request->execute($data);
-			$this->_last_inserted_id = $this->_pdo->lastInsertId();
-			$this->_pdo->commit();
-			return $request;
-		}
-		catch (PDOException $e)
-		{
-			$this->_pdo->rollback();
-			$this->_errors[] = $e->getMessage();
+			try
+			{
+				$request = $this->_pdo->prepare($syntax);
+				$this->_pdo->beginTransaction();
+				$result = $request->execute($data);
+				$this->_last_inserted_id = $this->_pdo->lastInsertId();
+				$this->_pdo->commit();
+				return $request;
+			}
+			catch (PDOException $e)
+			{
+				$this->_pdo->rollback();
+				$this->_errors[] = $e->getMessage();
+			}
 		}
 		return false;
 	}

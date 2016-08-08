@@ -1,3 +1,3 @@
 # WhiteCanvas
 
-WhiteCanvas is a very light, basic and simple php framework...
+WhiteCanvas is a very light and simple web framework featuring a basic php MVC with very simple and focussed js/css tools.

@@ -16,6 +16,7 @@ class Db
 	private static $instance;
 	private $_type = '';
 	private $_host = '';
+	private $_port = '';
 	private $_user = '';
 	private $_password = '';
 	private $_dbname = '';
@@ -79,8 +80,11 @@ class Db
 
 	public function __construct()
 	{
-		$this->readCredentials();
-		$this->connect();
+		if (file_exists(_CONFIG_DIR_."/encoded/dbcredentials.php"))
+		{
+			$this->readCredentials();
+			$this->connect();
+		}
 	}
 
 	public function __destruct()
@@ -101,103 +105,110 @@ class Db
 		if (!$this->_pdo)
 		{
 			$this->connect();
+			if (!$this->_pdo)
+				return false;
 		}
-		else
+		try
 		{
-			try
-			{
-				$this->_pdo->query('SELECT 1');
-			}
-			catch (PDOException $e)
-			{
-				$this->connect();
-			}
+			$this->_pdo->query('SELECT 1');
 		}
-		return false;
+		catch (PDOException $e)
+		{
+			return false;
+		}
+		return true;
 	}
 
 	public function execute($syntax, $data = null)
 	{
-		$this->checkConnection();
-		try
+		if ($this->checkConnection())
 		{
-			$request = $this->_pdo->prepare($syntax);
-			$this->_pdo->beginTransaction();
-			$result = $request->execute($data);
-			$this->_last_inserted_id = $this->_pdo->lastInsertId();
-			$this->_pdo->commit();
-			return $request;
-		}
-		catch (PDOException $e)
-		{
-			$this->_pdo->rollback();
-			$this->_errors[] = $e->getMessage();
+			try
+			{
+				$request = $this->_pdo->prepare($syntax);
+				$this->_pdo->beginTransaction();
+				$result = $request->execute($data);
+				$this->_last_inserted_id = $this->_pdo->lastInsertId();
+				$this->_pdo->commit();
+				return $request;
+			}
+			catch (PDOException $e)
+			{
+				$this->_pdo->rollback();
+				$this->_errors[] = $e->getMessage();
+			}
 		}
 		return false;
 	}
 
 	public function getRows($syntax, $data)
 	{
-		$this->checkConnection();
-		try
+		if ($this->checkConnection())
 		{
-			$result = $this->execute($syntax, $data);
-			if ($result && $result->columnCount() > 0) {
-				$rows = $result->fetchAll(PDO::FETCH_ASSOC);
-				$result = null;
-				return $rows;
+			try
+			{
+				$result = $this->execute($syntax, $data);
+				if ($result && $result->columnCount() > 0) {
+					$rows = $result->fetchAll(PDO::FETCH_ASSOC);
+					$result = null;
+					return $rows;
+				}
+				if ($result)
+					$result = null;
 			}
-			if ($result)
-				$result = null;
-		}
-		catch (PDOException $e)
-		{
-			$this->_errors[] = $e->getMessage();
+			catch (PDOException $e)
+			{
+				$this->_errors[] = $e->getMessage();
+			}
 		}
 		return false;
 	}
 
 	public function getValue($syntax, $data)
 	{
-		$this->checkConnection();
-		try
+		if ($this->checkConnection())
 		{
-			$result = $this->execute($syntax."\nLIMIT 1;", $data);
-			if ($result && $result->columnCount() > 0) {
-				$row = $result->fetch(PDO::FETCH_ASSOC);
-				$result = null;
-				if ($row && is_array($row))
-					return reset($row);
-				else
-					return false;
+			try
+			{
+				$result = $this->execute($syntax."\nLIMIT 1;", $data);
+				if ($result && $result->columnCount() > 0) {
+					$row = $result->fetch(PDO::FETCH_ASSOC);
+					$result = null;
+					if ($row && is_array($row))
+						return reset($row);
+					else
+						return false;
+				}
+				if ($result)
+					$result = null;
 			}
-			if ($result)
-				$result = null;
-		}
-		catch (PDOException $e)
-		{
-			$this->_errors[] = $e->getMessage();
+			catch (PDOException $e)
+			{
+				$this->_errors[] = $e->getMessage();
+			}
 		}
 		return false;
 	}
 
 	public function getRow($syntax, $data)
 	{
-		$this->checkConnection();
-		try
+		if ($this->checkConnection())
 		{
-			$result = $this->execute($syntax."\nLIMIT 1;", $data);
-			if ($result &&  $result->columnCount() > 0) {
-				$row = $result->fetch(PDO::FETCH_ASSOC);
-				$result = null;
-				return $row;
+			try
+			{
+				$result = $this->execute($syntax."\nLIMIT 1;", $data);
+				if ($result &&  $result->columnCount() > 0) {
+					$row = $result->fetch(PDO::FETCH_ASSOC);
+					$result = null;
+					return $row;
+				}
+				if ($result)
+					$result = null;
 			}
-			if ($result)
-				$result = null;
-		}
-		catch (PDOException $e)
-		{
-			$this->_errors[] = $e->getMessage();
+			catch (PDOException $e)
+			{
+				$this->_errors[] = $e->getMessage();
+			}
 		}
 		return false;
 	}

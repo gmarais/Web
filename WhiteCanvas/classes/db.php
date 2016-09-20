@@ -105,24 +105,22 @@ class Db
 		if (!$this->_pdo)
 		{
 			$this->connect();
+			if (!$this->_pdo)
+				return false;
 		}
-		else
+		try
 		{
-			try
-			{
-				$this->_pdo->query('SELECT 1');
-			}
-			catch (PDOException $e)
-			{
-				$this->connect();
-			}
+			$this->_pdo->query('SELECT 1');
 		}
-		return false;
+		catch (PDOException $e)
+		{
+			return false;
+		}
+		return true;
 	}
 
 	public function execute($syntax, $data = null)
 	{
-		$this->checkConnection();
 		if ($this->checkConnection())
 		{
 			try
@@ -145,66 +143,72 @@ class Db
 
 	public function getRows($syntax, $data)
 	{
-		$this->checkConnection();
-		try
+		if ($this->checkConnection())
 		{
-			$result = $this->execute($syntax, $data);
-			if ($result && $result->columnCount() > 0) {
-				$rows = $result->fetchAll(PDO::FETCH_ASSOC);
-				$result = null;
-				return $rows;
+			try
+			{
+				$result = $this->execute($syntax, $data);
+				if ($result && $result->columnCount() > 0) {
+					$rows = $result->fetchAll(PDO::FETCH_ASSOC);
+					$result = null;
+					return $rows;
+				}
+				if ($result)
+					$result = null;
 			}
-			if ($result)
-				$result = null;
-		}
-		catch (PDOException $e)
-		{
-			$this->_errors[] = $e->getMessage();
+			catch (PDOException $e)
+			{
+				$this->_errors[] = $e->getMessage();
+			}
 		}
 		return false;
 	}
 
 	public function getValue($syntax, $data)
 	{
-		$this->checkConnection();
-		try
+		if ($this->checkConnection())
 		{
-			$result = $this->execute($syntax."\nLIMIT 1;", $data);
-			if ($result && $result->columnCount() > 0) {
-				$row = $result->fetch(PDO::FETCH_ASSOC);
-				$result = null;
-				if ($row && is_array($row))
-					return reset($row);
-				else
-					return false;
+			try
+			{
+				$result = $this->execute($syntax."\nLIMIT 1;", $data);
+				if ($result && $result->columnCount() > 0) {
+					$row = $result->fetch(PDO::FETCH_ASSOC);
+					$result = null;
+					if ($row && is_array($row))
+						return reset($row);
+					else
+						return false;
+				}
+				if ($result)
+					$result = null;
 			}
-			if ($result)
-				$result = null;
-		}
-		catch (PDOException $e)
-		{
-			$this->_errors[] = $e->getMessage();
+			catch (PDOException $e)
+			{
+				$this->_errors[] = $e->getMessage();
+			}
 		}
 		return false;
 	}
 
 	public function getRow($syntax, $data)
 	{
-		$this->checkConnection();
-		try
+		if ($this->checkConnection())
 		{
-			$result = $this->execute($syntax."\nLIMIT 1;", $data);
-			if ($result &&  $result->columnCount() > 0) {
-				$row = $result->fetch(PDO::FETCH_ASSOC);
-				$result = null;
-				return $row;
+			try
+			{
+				$result = $this->execute($syntax."\nLIMIT 1;", $data);
+				if ($result &&  $result->columnCount() > 0) {
+					$row = $result->fetch(PDO::FETCH_ASSOC);
+					$result = null;
+					return $row;
+				}
+				if ($result)
+					$result = null;
 			}
-			if ($result)
-				$result = null;
-		}
-		catch (PDOException $e)
-		{
-			$this->_errors[] = $e->getMessage();
+			catch (PDOException $e)
+			{
+				$this->_errors[] = $e->getMessage();
+			}
 		}
 		return false;
 	}
